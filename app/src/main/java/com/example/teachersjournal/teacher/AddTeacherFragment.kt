@@ -31,22 +31,15 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AddTeacherFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-//Fragment()
 class AddTeacherFragment : AppCompatActivity() {
     // TODO: Rename and change types of parameters
     private val db by lazy { TeachersDatabase(this) }
     private var teacherId = 0
 
-    private var param1: String? = null
-    private var param2: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_add_teacher)
-        /*arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }*/
+
 
         setupView()
         setupLstener()
@@ -84,8 +77,8 @@ class AddTeacherFragment : AppCompatActivity() {
                 db.teachersDatabaceDao().insert(
                     Teachers(
                         0,
-                        edit_title.text.toString(),
-                        edit_note.text.toString()
+                        first_name.text.toString(),
+                        second_name.text.toString()
                     )
                 )
                 finish()
@@ -96,8 +89,8 @@ class AddTeacherFragment : AppCompatActivity() {
                 db.teachersDatabaceDao().update(
                     Teachers(
                         teacherId,
-                        edit_title.text.toString(),
-                        edit_note.text.toString()
+                        first_name.text.toString(),
+                        second_name.text.toString()
                     )
                 )
                 finish()
@@ -109,8 +102,8 @@ class AddTeacherFragment : AppCompatActivity() {
         teacherId = intent.getIntExtra("teacher_id", 0)
         CoroutineScope(Dispatchers.IO).launch {
             val teacher = db.teachersDatabaceDao().getTeacher(teacherId).get(0)
-            edit_note.setText(teacher.firstName)
-            edit_note.setText(teacher.secondName)
+            first_name.setText(teacher.firstName)
+            second_name.setText(teacher.secondName)
         }
     }
 
@@ -122,56 +115,4 @@ class AddTeacherFragment : AppCompatActivity() {
     private fun intentType(): Int {
         return intent.getIntExtra("intent_type", 0)
     }
-
-/*
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val application = requireNotNull(this.activity).application
-        val dataSource = TeachersDatabase.getInstance(application).teachersDatabaceDao
-
-
-        val buttonAdd = view.findViewById<Button>(com.example.teachersjournal.R.id.button_Addteacher)
-        buttonAdd?.setOnClickListener {
-
-            val teacherViewModel = TeacherViewModel(dataSource, application)
-            teacherViewModel.addTeacher(NameTeacher.text.toString(), SecondName.text.toString())
-
-
-            findNavController().navigate(R.id.action_addTeacherFragment_to_teacherFragment, null)
-        }
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(
-            com.example.teachersjournal.R.layout.fragment_add_teacher,
-            container,
-            false
-        )
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddTeacherFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddTeacherFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }*/
 }

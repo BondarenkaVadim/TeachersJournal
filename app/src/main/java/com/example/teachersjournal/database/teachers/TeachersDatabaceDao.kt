@@ -14,9 +14,6 @@ interface TeachersDatabaceDao {
     @Update
     suspend fun update(teachers: Teachers)
 
-    @Query("SELECT * FROM old_teachers_database ORDER BY teacherId ASC")
-    fun readData(): Flow<List<Teachers>>
-
     @Delete
     suspend fun deleteTeacher(teachers: Teachers)
 
@@ -33,5 +30,5 @@ interface TeachersDatabaceDao {
     suspend fun getTeacher(note_id: Int): List<Teachers>
 
     @Query("SELECT * FROM old_teachers_database WHERE firstName LIKE :searchQuery OR secondName LIKE :searchQuery")
-    fun searchDatabace(searchQuery: String): Flow<List<Teachers>>
+    fun searchDatabace(searchQuery: String): List<Teachers>
 }

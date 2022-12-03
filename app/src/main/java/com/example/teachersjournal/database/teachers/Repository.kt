@@ -9,7 +9,7 @@ class Repository @Inject constructor(
 ) {
 
 
-    fun searchDatabase(searchQuery: String): Flow<List<Teachers>> {
+    fun searchDatabase(searchQuery: String): List<Teachers> {
         return personDao.searchDatabace(searchQuery)
     }
 

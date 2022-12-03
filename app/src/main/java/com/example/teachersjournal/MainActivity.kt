@@ -2,16 +2,11 @@ package com.example.teachersjournal
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.*
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.teachersjournal.database.teachers.Constant
 import com.example.teachersjournal.database.teachers.Teachers
 import com.example.teachersjournal.database.teachers.TeachersDatabase
@@ -20,21 +15,15 @@ import com.example.teachersjournal.teacher.TeacherAdapter
 import com.example.teachersjournal.teacher.TeacherViewModel
 import com.example.teachersjournal.weather.overview.WeatherFragment
 import kotlinx.android.synthetic.main.activity_main.*
-
-
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var courseRV: RecyclerView
-    private lateinit var newRecycleview: RecyclerView
-    private lateinit var tempArrayList: ArrayList<Teachers>
-    private lateinit var newArrayList: ArrayList<Teachers>
+
 
     private val db by lazy { TeachersDatabase(this) }
     lateinit var teacherAdapter: TeacherAdapter
@@ -104,7 +93,8 @@ class MainActivity : AppCompatActivity() {
 
             })
 
-        }*/
+        }
+    */
     override fun onResume() {
         super.onResume()
         loadData()
@@ -164,10 +154,6 @@ class MainActivity : AppCompatActivity() {
                 .putExtra("teacher_id", teacher_id)
         )
     }
-//______
-
-
-//   ____
 
     private fun deleteAlert(teacher: Teachers) {
         val dialog = AlertDialog.Builder(this)
@@ -187,18 +173,5 @@ class MainActivity : AppCompatActivity() {
         }
         dialog.show()
     }
-
-
-    /*   override fun onQueryTextSubmit(query: String?): Boolean {
-           return true
-       }
-
-       override fun onQueryTextChange(query: String?): Boolean {
-           if(query != null){
-               searchDatabase(query)
-           }
-           return true
-       }
-    */
 
 }
