@@ -18,9 +18,11 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="31"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".MainActivity"
+
+        <activity android:name=".teacher.AddTeacherFragment"></activity>
+        <activity android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,5 +30,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

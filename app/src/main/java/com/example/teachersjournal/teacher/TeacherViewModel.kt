@@ -1,79 +1,26 @@
 package com.example.teachersjournal.teacher
 
 import android.app.Application
+
+import android.text.method.TextKeyListener.clear
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.example.teachersjournal.R
+import com.example.teachersjournal.database.teachers.Repository
 import com.example.teachersjournal.database.teachers.Teachers
 import com.example.teachersjournal.database.teachers.TeachersDatabaceDao
 import com.example.teachersjournal.formatTeachers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 
-class TeacherViewModel(
-    val database: TeachersDatabaceDao,
-    application: Application,
-) : AndroidViewModel(application) {
+class TeacherViewModel @ViewModelInject constructor(
+    private val repository: Repository,
+) : ViewModel() {
 
 
-    private val newAddTeachers = MutableLiveData<Teachers?>()
-    private val allteachers = database.gelAllTeacher()
-    val list: MutableLiveData<List<String>> = MutableLiveData()
-
-
-    var teacherString = Transformations.map(allteachers) { allteacthers ->
-        formatTeachers(allteacthers, application.resources)
+    fun searchDatabase(searchQuery: String): Flow<List<Teachers>> {
+        return repository.searchDatabase(searchQuery)
     }
-
-
-
-
-    fun showAllTeachers() {
-    //   teacherString.value = null
-    }
-
-
-
-    private suspend fun insert(teachers: Teachers) {
-        database.insert(teachers)
-    }
-
-    private suspend fun update(teachers: Teachers) {
-        database.update(teachers)
-    }
-
-    private suspend fun clear() {
-        database.clear()
-    }
-
-    private var _showSnackbarEvent = MutableLiveData<Boolean>()
-    val showSnackbarEvent: LiveData<Boolean>
-        get() = _showSnackbarEvent
-
-
-    private val _navigateToSleepQuality = MutableLiveData<Teachers>()
-    val navigateToSleepQuality: LiveData<Teachers>
-        get() = _navigateToSleepQuality
-
-    fun doneShowingSnackbar() {
-        _showSnackbarEvent.value = false
-    }
-
-    fun doneNavigating() {
-        _navigateToSleepQuality.value = null
-    }
-
-
-    fun addTeacher() {
-        viewModelScope.launch {
-            val newTeacher = Teachers(firstName = "vadim")
-            insert(newTeacher)
-        }
-    }
-
-    fun onClear() {
-        viewModelScope.launch {
-            clear()
-        }
-    }
-
-
 }

@@ -3,21 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/teacherFragment">
-    <fragment
-        android:id="@+id/teacherFragment"
-        android:name="com.example.teachersjournal.teacher.TeacherFragment"
-        android:label="TeacherFragment"
-        tools:layout="@layout/fragment_teacher"
-        >
-        <action
-            android:id="@+id/action_teacherFragment_to_weatherFragment"
-            app:destination="@id/weatherFragment" />
-    </fragment>
+    app:startDestination="@id/mainActivity">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.teachersjournal.MainActivity"
+        android:label="MainActivity" />
     <fragment
         android:id="@+id/weatherFragment"
         android:name="com.example.teachersjournal.weather.overview.WeatherFragment"
-        android:label="fragment_weather"
-        tools:layout="@layout/fragment_weather" />
-
+        android:label="WeatherFragment" >
+        <action
+            android:id="@+id/action_weatherFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
 </navigation>

@@ -10,7 +10,7 @@ import com.example.teachersjournal.weather.network.WeatherProperty
 import kotlinx.coroutines.launch
 
 
-
+enum class WeatherStatus { LOADING, ERROR, DONE }
 
 class OverviewViewModel : ViewModel() {
 /*

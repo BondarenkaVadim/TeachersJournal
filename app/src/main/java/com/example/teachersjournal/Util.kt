@@ -76,6 +76,8 @@ fun formatTeachers(nights: List<Teachers>, resources: Resources): Spanned {
             append("ID:")
             append("\t${it.teacherId}<br>")
             append("\t${it.firstName}<br>")
+            append("\t${it.secondName}<br>")
+
 
             /*   append("<br>")
                append(resources.getString(R.string.start_time))
